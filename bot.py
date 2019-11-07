@@ -39,11 +39,10 @@ async def on_message(message):
         query = message.content.lower()[7:]
         print(query)
         querysplit = query.split()
-        printableMessage = "https://lmgtfy.com/?q="
+        printableMessage = "https://google.com/search?q="
         for element in querysplit:
             printableMessage += element + "+"
         printableMessage = printableMessage[0:-1]
-        printableMessage += "&s=g"
         await message.channel.send("Here you go! " + printableMessage)
 
 
