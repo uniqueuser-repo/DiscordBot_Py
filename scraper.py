@@ -36,4 +36,6 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     for i in range(len(returnOrderedDict)):
         returnedList.append(list(returnOrderedDict.items())[i][1])
 
+    driver.close()
+
     return returnedList
