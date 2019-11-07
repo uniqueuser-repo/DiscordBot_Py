@@ -17,4 +17,5 @@ soup = BeautifulSoup(html, 'html.parser')
 #print("soup = " + str(soup))
 
 for element in soup.find_all('span', {'class':'station-item-text'}):
-    print(str(element.contents))
+    elementString = element.contents[0]
+    print(elementString)
