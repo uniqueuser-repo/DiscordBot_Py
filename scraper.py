@@ -20,7 +20,8 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     driver.get(url)
     html = driver.page_source
 
-    if html.count("Bummer!"):
+    if html.count("Bummer!") or len(html) == 0:
+        driver.close()
         return None              # returns "none" if the DC is closed that day
 
 
@@ -36,7 +37,7 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     for i in range(len(returnOrderedDict)):
         returnedList.append(list(returnOrderedDict.items())[i][1])
 
-    #driver.close()
+    driver.close()
     print()
 
     return returnedList
