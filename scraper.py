@@ -13,5 +13,8 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, 'html.parser')
 
-print("len soup = " + str(len(soup)))
-print("soup = " + str(soup))
+#print("len soup = " + str(len(soup)))
+#print("soup = " + str(soup))
+
+for element in soup.find_all('span', {'class':'station-item-text'}):
+    print(str(element.contents))
