@@ -30,7 +30,7 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
         elementString = str(element.contents[0].encode('utf-8'))
         elementString = elementString[2:-1]
         if goods.count(elementString.lower()) != 0:
-            returnOrderedDict[elementString] = 1         # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
+            returnOrderedDict[elementString.lower()] = 1         # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
 
     returnedList = []
     for i in range(len(returnOrderedDict)):
