@@ -5,9 +5,9 @@ from collections import OrderedDict
 
 def scrapedList(url_input):  # returns a value listing of matched foods or "NONE" if dining court is closed
     goods = ["orange chicken", "popcorn chicken", "breaded chicken tenders", "crispy pepperoni pizza", "hamburgers", "popcorn shrimp", "crispy meat lovers pizza", "sloppy joe",
-             "made to order piedmont pasta bar", "sloppy joe", "mini corn dogs", "steak house coulotte beef wiley", "clam strips", "spicy fried cheese ravioli", "meat lover's pizza",
+             'made to order venetian pasta bar', "sloppy joe", "mini corn dogs", "steak house coulotte beef wiley", "clam strips", "spicy fried cheese ravioli", "meat lover's pizza",
              "tempura sweet & sour chicken", "macaroni shells and cheese", "fraldinha beef", "cream cheese wonton", "crispy jalapeno popper pizza", "crispy mac n cheese pizza",
-             "fajita seasoned beef with vegetables", "general tso chicken", "hamburger", "mozzarella sticks"]
+             "fajita seasoned beef with vegetables", "general tso chicken", "hamburger", "mozzarella sticks", "macaroni & cheese", "crispy meat lovers pizza"]
 
     returnOrderedDict = OrderedDict() # key-value mapping OrderedDict
 
@@ -36,6 +36,7 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     for i in range(len(returnOrderedDict)):
         returnedList.append(list(returnOrderedDict.items())[i][1])
 
-    driver.close()
+    #driver.close()
+    print()
 
     return returnedList
