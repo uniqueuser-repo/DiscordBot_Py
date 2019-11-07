@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+
 import time
 
 url = "https://dining.purdue.edu/menus/Wiley/2019/11/7/"
@@ -21,7 +22,12 @@ goods = ["orange chicken", "popcorn chicken", "breaded chicken tenders", "crispy
          "tempura sweet & sour chicken", "macaroni shells and cheese", "fraldinha beef", "cream cheese wonton", "crispy jalapeno popper pizza", "crispy mac n cheese pizza",
          "fajita seasoned beef with vegetables", "general tso chicken", "hamburger", "mozzarella sticks"]
 
+print("a")
 for element in soup.find_all('span', {'class':'station-item-text'}):
-    elementString = element.contents[0]
-    if goods.count(elementString) != 0:
-        print(elementString)
+    elementString = str(element.contents[0].encode('utf-8'))
+    elementString = elementString[2:-1]
+    #print(elementString.lower())
+    #print("Type: " + str(type(elementString.lower())))
+    var = goods.count(elementString.lower())
+    if goods.count(elementString.lower()) != 0:
+        print("FOUND! " + elementString)
