@@ -33,7 +33,13 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     soup = BeautifulSoup(html, 'html.parser')
     returnedFoodList = []
 
-    for element in soup.find_all('span', {'class':'station-item-text'}):
+
+    var = soup.find_all('span', {'class':'station-item-text'})
+
+    if (len(var) <= 1):
+        return None, "An error occured while scraping this dining court."
+
+    for element in var:
         elementString = str(element.contents[0].encode('utf-8'))
         elementString = elementString[2:-1]
         elementStringLower = elementString.lower()
