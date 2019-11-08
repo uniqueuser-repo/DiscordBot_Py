@@ -27,15 +27,17 @@ def evaluate(dateTime):
     windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
 
-    notableFoods = "Notables:\nFord: " + str(fordFoodScraped) + "\n"
+    notableFoods = "Notables:\n||Ford: " + str(fordFoodScraped) + "\n"
     notableFoods += "Wiley: " + str(wileyFoodScraped) + "\n"
     notableFoods += "Hillenbrand: " + str(windsorFoodScraped) + "\n"
     notableFoods += "Windsor: " + str(fordFoodScraped) + "\n"
+    notableFoods += "||"
 
     if fordScraped != None:
         dataset.append(fordScraped)
     else:
         dataset.append([0] * 25)
+
     if wileyScraped != None:
         dataset.append(wileyScraped)
     else:
@@ -44,6 +46,7 @@ def evaluate(dateTime):
         dataset.append(hillenbrandScraped)
     else:
         dataset.append([0] * 25)
+        
     if windsorScraped != None:
         dataset.append(windsorScraped)
     else:

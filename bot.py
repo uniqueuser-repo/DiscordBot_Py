@@ -64,16 +64,26 @@ async def on_message(message):
         printableMessage = printableMessage[0:-1]
         await message.channel.send("Here you go! " + printableMessage)
 
-    if (message.content.lower().startswith(".foodme")):
-        if len(message.content.lower().split()) > 1:
-            splitList = message.content.lower().split()
-            dateString = splitList[1]
-            date_time_obj = datetime.datetime.strptime(dateString, '%m/%d/%Y')
-            printString = createPrintStringNoMention(date_time_obj)
-            await message.channel.send(printString)
-        else:
-            printString = createPrintStringMention(datetime.datetime.today())
-            await message.channel.send(printString)
+    try:
+        if (message.content.lower().startswith(".foodme")):
+            if len(message.content.lower().split()) > 1:
+                splitList = message.content.lower().split()
+                dateString = splitList[1]
+                date_time_obj = datetime.datetime.strptime(dateString, '%m/%d/%Y')
+                if date_time_obj.weekday() == 6:
+                    await message.channel.send("That's a Sunday homie. No din din.")
+                else:
+                    printString = createPrintStringNoMention(date_time_obj)
+                    await message.channel.send(printString)
+            else:
+                printString = createPrintStringMention(datetime.datetime.today())
+                await message.channel.send(printString)
+    except ValueError as e:
+        print("yikes")
+        await message.channel.send(str(e))
+    except Exception as e:
+        print("yikes")
+        await message.channel.send("Please see console! Unexpected exception:\n" + str(e))
 
 def createPrintStringMention(dateTime):
     printString = createPrintStringNoMention(dateTime)
