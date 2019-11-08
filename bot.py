@@ -16,18 +16,6 @@ client = discord.Client()
 
 
 
-
-# async def my_background_task():
-#     await client.wait_until_ready()
-#     channel = client.get_channel(640793807121809408)
-#     while True:
-#         datetimeNow = datetime.datetime.today()
-#         datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
-#         datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
-#         totalWait = (datetimeNextDay-datetimeNow).total_seconds()
-#         await channel.send(createPrintStringNoMention(datetime.datetime.today()))
-#         await asyncio.sleep(totalWait)
-
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')

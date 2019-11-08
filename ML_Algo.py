@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from scraper import scrapedList
 import numpy as np
 from datetime import date
+import csv
 
 def evaluate(dateTime):
 
