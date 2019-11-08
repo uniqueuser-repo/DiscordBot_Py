@@ -22,10 +22,15 @@ def evaluate(dateTime):
     dayVal = dateTime.strftime("%d")
     monthVal = dateTime.strftime("%m")
 
-    wileyScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    hillenbrandScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    windsorScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    fordScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    wileyScraped, wileyFoodScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+
+    notableFoods = "Notables:\nFord: " + str(fordFoodScraped) + "\n"
+    notableFoods += "Wiley: " + str(wileyFoodScraped) + "\n"
+    notableFoods += "Hillenbrand: " + str(windsorFoodScraped) + "\n"
+    notableFoods += "Windsor: " + str(fordFoodScraped) + "\n"
 
     if fordScraped != None:
         dataset.append(fordScraped)
@@ -55,4 +60,4 @@ def evaluate(dateTime):
     # output format: [{ford} {wiley} {hillenbrand} {windsor}]
     df_predict = model.predict(queryDataFrame)
 
-    return (str(df_predict))
+    return (str(df_predict)), notableFoods

@@ -16,16 +16,17 @@ client = discord.Client()
 
 
 
-async def my_background_task():
-    await client.wait_until_ready()
-    channel = client.get_channel(640793807121809408)
-    while True:
-        datetimeNow = datetime.datetime.today()
-        datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
-        datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
-        totalWait = (datetimeNextDay-datetimeNow).total_seconds()
-        await channel.send(createPrintStringNoMention(datetime.datetime.today()))
-        await asyncio.sleep(totalWait)
+
+# async def my_background_task():
+#     await client.wait_until_ready()
+#     channel = client.get_channel(640793807121809408)
+#     while True:
+#         datetimeNow = datetime.datetime.today()
+#         datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
+#         datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
+#         totalWait = (datetimeNextDay-datetimeNow).total_seconds()
+#         await channel.send(createPrintStringNoMention(datetime.datetime.today()))
+#         await asyncio.sleep(totalWait)
 
 @client.event
 async def on_ready():
@@ -93,16 +94,18 @@ def createPrintStringMention(dateTime):
 
 def createPrintStringNoMention(dateTime):
     printString = "Ratings for " + dateTime.strftime('%m/%d/%Y') + ":\n"
-    evaluated = evaluate(dateTime)[1:-1]
+    evaluated, foodString = evaluate(dateTime)
+    evaluated = evaluated[1:-1]
     intList = [int(i) for i in evaluated.split()]
 
     printString += "Ford: " + str(intList[0]) + "\n"
     printString += "Wiley: " + str(intList[1]) + "\n"
     printString += "Hillenbrand: " + str(intList[2]) + "\n"
     printString += "Windsor: " + str(intList[3]) + "\n"
+    printString += "\n" + foodString
 
     return printString
 
 
-client.loop.create_task(my_background_task())
+# client.loop.create_task(my_background_task())
 client.run(TOKEN)

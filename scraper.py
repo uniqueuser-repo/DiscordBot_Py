@@ -27,16 +27,23 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
 
     if html.count("Bummer!") or len(html) == 0:
         driver.close()
-        return None              # returns "none" if the DC is closed that day
+        return None, None              # returns "none" if the DC is closed that day
 
 
     soup = BeautifulSoup(html, 'html.parser')
+    returnedFoodList = []
 
     for element in soup.find_all('span', {'class':'station-item-text'}):
         elementString = str(element.contents[0].encode('utf-8'))
         elementString = elementString[2:-1]
-        if goods.count(elementString.lower()) != 0:
-            returnOrderedDict[elementString.lower()] = 1         # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
+        elementStringLower = elementString.lower()
+        if goods.count(elementString.lower()) != 0 or elementStringLower.count('piedmont'):
+            if (elementStringLower.count('piedmont')):
+                returnOrderedDict['made to order venetian pasta bar'] = 1
+                returnedFoodList.append(elementString.lower())
+            else:
+                returnOrderedDict[elementString.lower()] = 1         # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
+                returnedFoodList.append(elementString.lower())
 
     returnedList = []
     for i in range(len(returnOrderedDict)):
@@ -45,5 +52,5 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     driver.close()
     print()
 
-    return returnedList
+    return returnedList, returnedFoodList
 
