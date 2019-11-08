@@ -9,6 +9,8 @@ def evaluate():
 
     input_dataset_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile.csv")
     input_dataset_labels_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile_labels.csv")
+    #print(input_dataset_frame)
+    del input_dataset_frame['Unnamed: 0']
 
     X_train, X_test, y_train, y_test = train_test_split(input_dataset_frame, input_dataset_labels_frame, test_size=0.20, random_state=42)
 
@@ -20,22 +22,40 @@ def evaluate():
     today = date.today()
     dayVal = today.strftime("%d")
     monthVal = today.strftime("%m")
-    print(dayVal)
-    print(monthVal)
-    dataset.append(scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" +
-                               monthVal.zfill(2) + "/" + dayVal.zfill(2) + "/Dinner"))
-    dataset.append(scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" +
-                               monthVal.zfill(2) + "/" + dayVal.zfill(2) + "/Dinner"))
-    dataset.append(scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" +
-                               monthVal.zfill(2) + "/" + dayVal.zfill(2) + "/Dinner"))
-    dataset.append(scrapedList("https://dining.purdue.edu/menus/Ford/2019/" +
-                               monthVal.zfill(2) + "/" + dayVal.zfill(2) + "/Dinner"))
+
+    wileyScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    hillenbrandScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    windsorScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    fordScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+
+    if fordScraped != None:
+        dataset.append(fordScraped)
+    else:
+        dataset.append([0] * 25)
+    if wileyScraped != None:
+        dataset.append(wileyScraped)
+    else:
+        dataset.append([0] * 25)
+    if hillenbrandScraped != None:
+        dataset.append(hillenbrandScraped)
+    else:
+        dataset.append([0] * 25)
+    if windsorScraped != None:
+        dataset.append(windsorScraped)
+    else:
+        dataset.append([0] * 25)
 
     queryDataFrame = pd.DataFrame(dataset)
+    queryDataFrame.columns = ['oge_chkn','ppc_chkn','tenders','pep_pizza','hamburg','shrimp','ML_Pizza','slop_jo','pasta','min_cornd','coulotte','clam_strip','cheese_rav', 'ML_pizza','SS_chkn',
+                              'mac','fraldinha','wonton','popper','mac_pizza','fajita','tso_chkn','hamburg','mozz_stk','mac']
 
 
-    df_predict = model.predict(X_test) # df
+    queryDataFrame.to_csv(r'C:\Users\Andy\PycharmProjects\DiscordBot_Py\intermediary.csv')
 
-    #print(X_test)
+
+    df_predict = model.predict(queryDataFrame)
+
+    print(str(df_predict))
+
 
 evaluate()
