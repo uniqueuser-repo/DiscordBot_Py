@@ -4,14 +4,16 @@ import datetime
 from datetime import timedelta
 from dotenv import load_dotenv
 from ML_Algo import evaluate
+from multiprocessing import Process
 import asyncio
 
 load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD= os.getenv('DISCORD_GUILD')
+GUILD = os.getenv('DISCORD_GUILD')
 
 client = discord.Client()
+
 
 
 async def my_background_task():
@@ -43,7 +45,7 @@ async def on_member_join(member):
 
 @client.event
 async def on_message(message):
-    print(message.content)
+    print(message.content.lower())
     if message.author == client.user:
         return
 
@@ -66,14 +68,14 @@ async def on_message(message):
             splitList = message.content.lower().split()
             dateString = splitList[1]
             date_time_obj = datetime.datetime.strptime(dateString, '%m/%d/%Y')
-            printString = createPrintStringNoMention(date_time_obj)
+            printString = await createPrintStringNoMention(date_time_obj)
             await message.channel.send(printString)
         else:
-            printString = createPrintStringMention(datetime.datetime.today())
+            printString = await createPrintStringMention(datetime.datetime.today())
             await message.channel.send(printString)
 
 
-def createPrintStringMention(dateTime):
+async def createPrintStringMention(dateTime):
     printString = createPrintStringNoMention(dateTime)
 
     roles = client.guilds[0].roles
@@ -88,7 +90,9 @@ def createPrintStringMention(dateTime):
 
     return printString
 
-def createPrintStringNoMention(dateTime):
+
+
+async def createPrintStringNoMention(dateTime):
     printString = "Ratings for " + dateTime.strftime('%m/%d/%Y') + ":\n"
     evaluated = evaluate(dateTime)[1:-1]
     intList = [int(i) for i in evaluated.split()]
