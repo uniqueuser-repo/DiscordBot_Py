@@ -53,9 +53,7 @@ def evaluate():
     queryDataFrame.to_csv(r'C:\Users\Andy\PycharmProjects\DiscordBot_Py\intermediary.csv')
 
 
+    # output format: [{ford} {wiley} {hillenbrand} {windsor}]
     df_predict = model.predict(queryDataFrame)
 
-    print(str(df_predict))
-
-
-evaluate()
+    return (str(df_predict))

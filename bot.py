@@ -3,6 +3,7 @@ import discord
 
 from dotenv import load_dotenv
 from ML_Algo import evaluate
+import asyncio
 
 load_dotenv()
 
@@ -48,7 +49,19 @@ async def on_message(message):
         await message.channel.send("Here you go! " + printableMessage)
 
     if (message.content.lower().startswith(".foodme")):
-        evaluate()
+        printString = evaluate()
 
+        await message.channel.send(evaluate())
 
+async def my_background_task():
+    await client.wait_until_ready()
+    counter = 0
+    channel = discord.Object(id=641844809606365187)
+    while not client.is_closed:
+        counter += 1
+        print("inside")
+        await client.send_message(channel, evaluate())
+        await asyncio.sleep(1)
+
+client.loop.create_task(my_background_task())
 client.run(TOKEN)
