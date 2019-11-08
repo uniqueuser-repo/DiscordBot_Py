@@ -10,7 +10,7 @@ import asyncio
 load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
+GUILD= os.getenv('DISCORD_GUILD')
 
 client = discord.Client()
 
@@ -24,7 +24,7 @@ async def my_background_task():
         datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
         datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
         totalWait = (datetimeNextDay-datetimeNow).total_seconds()
-        await channel.send(createPrintStringNoMention(datetime.datetime.today()))
+        await channel.send(await createPrintStringNoMention(datetime.datetime.today()))
         await asyncio.sleep(totalWait)
 
 @client.event
