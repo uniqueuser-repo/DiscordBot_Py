@@ -24,7 +24,7 @@ async def my_background_task():
         datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
         datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
         totalWait = (datetimeNextDay-datetimeNow).total_seconds()
-        await channel.send(await createPrintStringNoMention(datetime.datetime.today()))
+        await channel.send(createPrintStringNoMention(datetime.datetime.today()))
         await asyncio.sleep(totalWait)
 
 @client.event
@@ -68,14 +68,13 @@ async def on_message(message):
             splitList = message.content.lower().split()
             dateString = splitList[1]
             date_time_obj = datetime.datetime.strptime(dateString, '%m/%d/%Y')
-            printString = await createPrintStringNoMention(date_time_obj)
+            printString = createPrintStringNoMention(date_time_obj)
             await message.channel.send(printString)
         else:
-            printString = await createPrintStringMention(datetime.datetime.today())
+            printString = createPrintStringMention(datetime.datetime.today())
             await message.channel.send(printString)
 
-
-async def createPrintStringMention(dateTime):
+def createPrintStringMention(dateTime):
     printString = createPrintStringNoMention(dateTime)
 
     roles = client.guilds[0].roles
@@ -92,7 +91,7 @@ async def createPrintStringMention(dateTime):
 
 
 
-async def createPrintStringNoMention(dateTime):
+def createPrintStringNoMention(dateTime):
     printString = "Ratings for " + dateTime.strftime('%m/%d/%Y') + ":\n"
     evaluated = evaluate(dateTime)[1:-1]
     intList = [int(i) for i in evaluated.split()]
