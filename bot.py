@@ -1,6 +1,6 @@
 import os
 import discord
-
+import datetime
 from dotenv import load_dotenv
 from ML_Algo import evaluate
 import asyncio
@@ -11,6 +11,16 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD= os.getenv('DISCORD_GUILD')
 
 client = discord.Client()
+
+async def my_background_task():
+    await client.wait_until_ready()
+    counter = 0
+    channel = client.get_channel(641844809606365187)
+    while True:
+        counter += 1
+        print("inside")
+        await channel.send(createPrintString(datetime.datetime.today()))
+        await asyncio.sleep(86400)
 
 @client.event
 async def on_ready():
@@ -49,19 +59,21 @@ async def on_message(message):
         await message.channel.send("Here you go! " + printableMessage)
 
     if (message.content.lower().startswith(".foodme")):
-        printString = evaluate()
+        printString = createPrintString(datetime.datetime.today())
+        await message.channel.send(printString)
 
-        await message.channel.send(evaluate())
 
-async def my_background_task():
-    await client.wait_until_ready()
-    counter = 0
-    channel = discord.Object(id=641844809606365187)
-    while not client.is_closed:
-        counter += 1
-        print("inside")
-        await client.send_message(channel, evaluate())
-        await asyncio.sleep(1)
+def createPrintString(dateToday):
+    printString = "Ratings for " + dateToday.strftime('%m/%d/%Y') + ":\n"
+    evaluated = evaluate()[1:-1]
+    intList = [int(i) for i in evaluated.split()]
+
+    printString += "Ford: " + str(intList[0]) + "\n"
+    printString += "Wiley: " + str(intList[1]) + "\n"
+    printString += "Hillenbrand: " + str(intList[2]) + "\n"
+    printString += "Windsor: " + str(intList[3]) + "\n"
+    return printString
+
 
 client.loop.create_task(my_background_task())
 client.run(TOKEN)
