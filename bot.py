@@ -16,7 +16,7 @@ client = discord.Client()
 async def my_background_task():
     await client.wait_until_ready()
     counter = 0
-    channel = client.get_channel(641844809606365187)
+    channel = client.get_channel(640793807121809408)
     while True:
         datetimeNow = datetime.datetime.today()
         datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
@@ -25,7 +25,7 @@ async def my_background_task():
         counter += 1
         print("inside")
         await channel.send(createPrintString(datetime.datetime.today()))
-        print("Waiting: " + str(totalWait37))
+        print("Waiting: " + str(totalWait))
         await asyncio.sleep(totalWait)
 
 @client.event
@@ -41,7 +41,7 @@ async def on_ready():
 async def on_member_join(member):
     await member.create_dm()
     await member.dm_channel.send("Hi, " + member.name + ", welcome to my Discord server!")
-    channel = client.get_channel(641860185631096842)
+    channel = client.get_channel(640793807121809408)
     await channel.send("Welcome to " + member.name + "!")
 
 @client.event
