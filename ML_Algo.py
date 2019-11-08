@@ -5,7 +5,7 @@ from scraper import scrapedList
 import numpy as np
 from datetime import date
 
-def evaluate():
+def evaluate(dateTime):
 
     input_dataset_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile.csv")
     input_dataset_labels_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile_labels.csv")
@@ -19,9 +19,8 @@ def evaluate():
     model = ML_Obj.fit(X_train, np.ravel(y_train)) # model now contains the ML
 
     dataset = []
-    today = date.today()
-    dayVal = today.strftime("%d")
-    monthVal = today.strftime("%m")
+    dayVal = dateTime.strftime("%d")
+    monthVal = dateTime.strftime("%m")
 
     wileyScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     hillenbrandScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")

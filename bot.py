@@ -13,19 +13,16 @@ GUILD= os.getenv('DISCORD_GUILD')
 
 client = discord.Client()
 
+
 async def my_background_task():
     await client.wait_until_ready()
-    counter = 0
     channel = client.get_channel(640793807121809408)
     while True:
         datetimeNow = datetime.datetime.today()
         datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
         datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
         totalWait = (datetimeNextDay-datetimeNow).total_seconds()
-        counter += 1
-        print("inside")
-        await channel.send(createPrintString(datetime.datetime.today()))
-        print("Waiting: " + str(totalWait))
+        await channel.send(createPrintStringNoMention(datetime.datetime.today()))
         await asyncio.sleep(totalWait)
 
 @client.event
@@ -47,14 +44,14 @@ async def on_member_join(member):
 @client.event
 async def on_message(message):
     print(message.content)
-    if (message.author == client.user):
+    if message.author == client.user:
         return
 
-    if (message.content.lower() == ".bot_up help"):
+    if message.content.lower() == ".bot_up help":
         await message.channel.send(".google [query]\nReturns the google link of the query in place of [query].\nExample: .google hello"
                                    " will return https://google.com/search?q=hello\n")
 
-    if (message.content.lower().startswith(".google")):
+    if message.content.lower().startswith(".google"):
         query = message.content.lower()[7:]
         print(query)
         querysplit = query.split()
@@ -65,29 +62,41 @@ async def on_message(message):
         await message.channel.send("Here you go! " + printableMessage)
 
     if (message.content.lower().startswith(".foodme")):
-        printString = createPrintString(datetime.datetime.today())
-        await message.channel.send(printString)
+        if len(message.content.lower().split()) > 1:
+            splitList = message.content.lower().split()
+            dateString = splitList[1]
+            date_time_obj = datetime.datetime.strptime(dateString, '%m/%d/%Y')
+            printString = createPrintStringNoMention(date_time_obj)
+            await message.channel.send(printString)
+        else:
+            printString = createPrintStringMention(datetime.datetime.today())
+            await message.channel.send(printString)
 
 
-def createPrintString(dateToday):
-    printString = "Ratings for " + dateToday.strftime('%m/%d/%Y') + ":\n"
-    evaluated = evaluate()[1:-1]
+def createPrintStringMention(dateTime):
+    printString = createPrintStringNoMention(dateTime)
+
+    roles = client.guilds[0].roles
+    elementMention = 0
+    for element in roles:
+        if element.name == "Andy's croo":
+            elementMention = element.mention
+            break
+
+    printString += str(elementMention)
+    printString += "\n"
+
+    return printString
+
+def createPrintStringNoMention(dateTime):
+    printString = "Ratings for " + dateTime.strftime('%m/%d/%Y') + ":\n"
+    evaluated = evaluate(dateTime)[1:-1]
     intList = [int(i) for i in evaluated.split()]
 
     printString += "Ford: " + str(intList[0]) + "\n"
     printString += "Wiley: " + str(intList[1]) + "\n"
     printString += "Hillenbrand: " + str(intList[2]) + "\n"
     printString += "Windsor: " + str(intList[3]) + "\n"
-
-    roles = client.guilds[0].roles
-
-    elementMention = 0
-    for element in roles:
-        if element.name == "Andy's croo":
-            elementMention = element.mention
-
-    printString += str(elementMention)
-    printString += "\n"
 
     return printString
 
