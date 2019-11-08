@@ -2,6 +2,7 @@ import os
 import discord
 
 from dotenv import load_dotenv
+from ML_Algo import evaluate
 
 load_dotenv()
 
@@ -46,6 +47,8 @@ async def on_message(message):
         printableMessage = printableMessage[0:-1]
         await message.channel.send("Here you go! " + printableMessage)
 
+    if (message.content.lower().startswith(".foodme")):
+        evaluate()
 
 
 client.run(TOKEN)

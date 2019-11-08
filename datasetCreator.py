@@ -11,33 +11,35 @@ import pandas as pd
 
 dataset = []
 
-def scrapeDiningCourt(diningCourt, i, month):
+def scrapeDiningCourt(diningCourt, day, month):
     returnVal_ScrapedList = scrapedList("https://dining.purdue.edu/menus/" + diningCourt + "/2019/" + str(month).zfill(2) + "/" + str(i).zfill(2) + "/Dinner")
     if not (returnVal_ScrapedList is None):
         dataset.append(returnVal_ScrapedList)
 
 
-for i in range(16, 31, 1):               # covers Wiley, Hillenbrand, Ford, Windsor DC from 09/16 - 09/30
-    scrapeDiningCourt("Wiley", i, 9)
-    scrapeDiningCourt("Hillenbrand", i, 9)
-    scrapeDiningCourt("Ford", i, 9)
-    scrapeDiningCourt("Windsor", i, 9)
+for day in range(16, 31, 1):               # covers Wiley, Hillenbrand, Ford, Windsor DC from 09/16 - 09/30
+    scrapeDiningCourt("Wiley", day, 9)
+    scrapeDiningCourt("Hillenbrand", day, 9)
+    scrapeDiningCourt("Ford", day, 9)
+    scrapeDiningCourt("Windsor", day, 9)
 
-for i in range(1, 32, 1):                # covers Wiley, Hillenbrand, Ford, Windsor DC from 10/01 - 10/31
-    scrapeDiningCourt("Wiley", i, 10)
-    scrapeDiningCourt("Hillenbrand", i, 10)
-    scrapeDiningCourt("Ford", i, 10)
-    scrapeDiningCourt("Windsor", i, 10)
+for day in range(1, 32, 1):                # covers Wiley, Hillenbrand, Ford, Windsor DC from 10/01 - 10/31
+    scrapeDiningCourt("Wiley", day, 10)
+    scrapeDiningCourt("Hillenbrand", day, 10)
+    scrapeDiningCourt("Ford", day, 10)
+    scrapeDiningCourt("Windsor", day, 10)
 
-for i in range(1, 18, 1):
-    scrapeDiningCourt("Wiley", i, 11)
-    scrapeDiningCourt("Hillenbrand", i, 11)
-    scrapeDiningCourt("Ford", i, 11)
-    scrapeDiningCourt("Windsor", i, 11)
+for day in range(1, 18, 1):
+    scrapeDiningCourt("Wiley", day, 11)
+    scrapeDiningCourt("Hillenbrand", day, 11)
+    scrapeDiningCourt("Ford", day, 11)
+    scrapeDiningCourt("Windsor", day, 11)
 
 dataset_to_pandas = pd.DataFrame.from_records(dataset)
 
 dataset_to_pandas.to_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile.csv")
+
+
 
 
 
