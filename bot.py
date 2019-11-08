@@ -1,6 +1,7 @@
 import os
 import discord
 import datetime
+from datetime import timedelta
 from dotenv import load_dotenv
 from ML_Algo import evaluate
 import asyncio
@@ -17,10 +18,15 @@ async def my_background_task():
     counter = 0
     channel = client.get_channel(641844809606365187)
     while True:
+        datetimeNow = datetime.datetime.today()
+        datetimeNextDay = datetime.datetime.today() + timedelta(days=1)
+        datetimeNextDay = datetimeNextDay.replace(hour=9, minute=0, second=0)
+        totalWait = (datetimeNextDay-datetimeNow).total_seconds()
         counter += 1
         print("inside")
         await channel.send(createPrintString(datetime.datetime.today()))
-        await asyncio.sleep(86400)
+        print("Waiting: " + str(totalWait37))
+        await asyncio.sleep(totalWait)
 
 @client.event
 async def on_ready():
