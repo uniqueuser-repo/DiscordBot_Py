@@ -78,6 +78,17 @@ def createPrintString(dateToday):
     printString += "Wiley: " + str(intList[1]) + "\n"
     printString += "Hillenbrand: " + str(intList[2]) + "\n"
     printString += "Windsor: " + str(intList[3]) + "\n"
+
+    roles = client.guilds[0].roles
+
+    elementMention = 0
+    for element in roles:
+        if element.name == "Andy's croo":
+            elementMention = element.mention
+
+    printString += str(elementMention)
+    printString += "\n"
+
     return printString
 
 
