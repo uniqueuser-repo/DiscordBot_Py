@@ -28,10 +28,10 @@ def evaluate(dateTime):
     windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
 
-    notableFoods = "Notables:\n||Ford: " + str(fordFoodScraped) + "\n"
-    notableFoods += "Wiley: " + str(wileyFoodScraped) + "\n"
-    notableFoods += "Hillenbrand: " + str(windsorFoodScraped) + "\n"
-    notableFoods += "Windsor: " + str(fordFoodScraped) + "\n"
+    notableFoods = "Notables:\n||__Ford__: " + str(fordFoodScraped) + "\n\n"
+    notableFoods += "__Wiley__: " + str(wileyFoodScraped) + "\n\n"
+    notableFoods += "__Hillenbrand__: " + str(hillenbrandFoodScraped) + "\n\n"
+    notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "\n"
     notableFoods += "||"
 
     if fordScraped != None:

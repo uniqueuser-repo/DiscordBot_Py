@@ -38,6 +38,9 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    if message.author.id == 443954797520093185:
+        return
+
     if message.content.lower() == ".bot_up help":
         await message.channel.send(".google [query]\nReturns the google link of the query in place of [query].\nExample: .google hello"
                                    " will return https://google.com/search?q=hello\n")
