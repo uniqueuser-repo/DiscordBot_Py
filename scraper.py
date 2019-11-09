@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from collections import OrderedDict
 from selenium.webdriver.chrome.options import Options
 
-def scrapedList(url_input):  # returns a value listing of matched foods or "NONE" if dining court is closed
+async def scrapedList(url_input):  # returns a value listing of matched foods or "NONE" if dining court is closed
     goods = ["orange chicken", "popcorn chicken", "breaded chicken tenders", "crispy pepperoni pizza", "hamburgers", "popcorn shrimp", "crispy meat lovers pizza", "sloppy joe",
              'made to order venetian pasta bar', "sloppy joe", "mini corn dogs", "steak house coulotte beef wiley", "clam strips", "spicy fried cheese ravioli", "meat lover's pizza",
              "tempura sweet & sour chicken", "macaroni shells and cheese", "fraldinha beef", "cream cheese wonton", "crispy jalapeno popper pizza", "crispy mac n cheese pizza",
@@ -44,11 +44,11 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
         elementString = elementString[2:-1]
         elementStringLower = elementString.lower()
         if goods.count(elementString.lower()) != 0 or elementStringLower.count('piedmont'):
-            if (elementStringLower.count('piedmont')):
+            if (elementStringLower.count('piedmont')):                     # different name, same thing
                 returnOrderedDict['made to order venetian pasta bar'] = 1
                 returnedFoodList.append(elementString.lower())
             else:
-                returnOrderedDict[elementString.lower()] = 1         # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
+                returnOrderedDict[elementString.lower()] = 1          # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
                 returnedFoodList.append(elementString.lower())
 
     returnedList = []
