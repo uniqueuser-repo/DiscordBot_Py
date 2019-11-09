@@ -1,8 +1,6 @@
 from scraper import scrapedList
 import pandas as pd
 
-# do some kind of matching so that we only send scrapedList valid urls from DC site
-
 # calendar valid days: 09/16 - 09/30
 #                      10/01 - 10/31
 #                      11/01 - 11/17

@@ -10,7 +10,7 @@ async def evaluate(dateTime):
 
     input_dataset_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile.csv")
     input_dataset_labels_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile_labels.csv")
-    #print(input_dataset_frame)
+
     del input_dataset_frame['Unnamed: 0']
 
     X_train, X_test, y_train, y_test = train_test_split(input_dataset_frame, input_dataset_labels_frame, test_size=0.20, random_state=42)
@@ -31,8 +31,7 @@ async def evaluate(dateTime):
     notableFoods = "Notables:\n||__Ford__: " + str(fordFoodScraped) + "\n\n"
     notableFoods += "__Wiley__: " + str(wileyFoodScraped) + "\n\n"
     notableFoods += "__Hillenbrand__: " + str(hillenbrandFoodScraped) + "\n\n"
-    notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "\n"
-    notableFoods += "||"
+    notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "||\n"
 
     if fordScraped != None:
         dataset.append(fordScraped)
@@ -62,6 +61,7 @@ async def evaluate(dateTime):
 
 
     # output format: [{ford} {wiley} {hillenbrand} {windsor}]
+
     df_predict = model.predict(queryDataFrame)
 
     return (str(df_predict)), notableFoods
