@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from collections import OrderedDict
 from selenium.webdriver.chrome.options import Options
 
-async def scrapedList(url_input):  # returns a value listing of matched foods or "NONE" if dining court is closed
+def scrapedList(url_input):  # returns a value listing of matched foods or "NONE" if dining court is closed
     goods = ["orange chicken", "popcorn chicken", "breaded chicken tenders", "crispy pepperoni pizza", "hamburgers", "popcorn shrimp", "crispy meat lovers pizza", "sloppy joe",
              'made to order venetian pasta bar', "sloppy joe", "mini corn dogs", "steak house coulotte beef wiley", "clam strips", "spicy fried cheese ravioli", "meat lover's pizza",
              "tempura sweet & sour chicken", "macaroni shells and cheese", "fraldinha beef", "cream cheese wonton", "crispy jalapeno popper pizza", "crispy mac n cheese pizza",

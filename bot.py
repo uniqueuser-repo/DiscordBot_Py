@@ -64,10 +64,10 @@ async def on_message(message):
                 if date_time_obj.weekday() == 6:
                     await message.channel.send("That's a Sunday homie. No din din.")
                 else:
-                    printString = await createPrintStringNoMention(date_time_obj)
+                    printString = createPrintStringNoMention(date_time_obj)
                     await message.channel.send(printString)
             else:
-                printString = await createPrintStringMention(datetime.datetime.today())
+                printString = createPrintStringMention(datetime.datetime.today())
                 await message.channel.send(printString)
     except ValueError as e:
         print("yikes")
@@ -76,8 +76,8 @@ async def on_message(message):
         print("yikes")
         await message.channel.send("Please see console! Unexpected exception:\n" + str(e))
 
-async def createPrintStringMention(dateTime):
-    printString = await createPrintStringNoMention(dateTime)
+def createPrintStringMention(dateTime):
+    printString = createPrintStringNoMention(dateTime)
 
     roles = client.guilds[0].roles
     elementMention = 0
@@ -93,9 +93,9 @@ async def createPrintStringMention(dateTime):
 
 
 
-async def createPrintStringNoMention(dateTime):
+def createPrintStringNoMention(dateTime):
     printString = "Ratings for " + dateTime.strftime('%m/%d/%Y') + ":\n"
-    evaluated, foodString = await evaluate(dateTime)
+    evaluated, foodString = evaluate(dateTime)
     evaluated = evaluated[1:-1]
     intList = [int(i) for i in evaluated.split()]
 
