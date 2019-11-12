@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from ML_Algo import evaluate
 from multiprocessing import Process
 import asyncio
+import psutil
 
 load_dotenv()
 
@@ -69,6 +70,14 @@ async def on_message(message):
             else:
                 printString = createPrintStringMention(datetime.datetime.today())
                 await message.channel.send(printString)
+
+            for process in psutil.process_iter():
+                try:
+                    if process.name().startswith("chromedriv"):
+                        process.terminate()
+                except psutil.NoSuchProcess:
+                    pass
+
     except ValueError as e:
         print("yikes")
         await message.channel.send(str(e))
