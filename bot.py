@@ -40,6 +40,8 @@ async def on_message(message):
         return
 
     if message.author.id == 443954797520093185:
+        if message.content.lower().count(".foodme") > 0:
+            print("CONSOLE: ignoring command from blocked user...")
         return
 
     if message.content.lower() == ".bot_up help":
