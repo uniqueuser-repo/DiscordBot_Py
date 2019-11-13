@@ -7,6 +7,7 @@ import numpy as np
 from dotenv import load_dotenv
 from datetime import date
 import csv
+import ast
 
 load_dotenv()
 
@@ -34,37 +35,30 @@ def evaluate(dateTime):
     monthVal = dateTime.strftime("%m")
 
     dataset = pd.read_csv(ONGOING_LIST)
-    wileyScraped, wileyFoodScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")  # for future, implement
-    windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")              # auto scraper that writes to file
-    fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")                       # to improve responsiveness?
-                                                                                                                                                                                     # and read file instead
 
-    notableFoods = "Notables:\n||__Ford__: " + str(fordFoodScraped) + "\n\n"
-    notableFoods += "__Wiley__: " + str(wileyFoodScraped) + "\n\n"
-    notableFoods += "__Hillenbrand__: " + str(hillenbrandFoodScraped) + "\n\n"
-    notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "||\n"
+    counter = 0;
+    to_feed = []
+    to_feed_notables = []
+    for index, row in dataset.iterrows():
+        if (counter == 4):
+            break
+        element = ast.literal_eval(row['0'])
 
-    if fordScraped != None:
-        dataset.append(fordScraped)
-    else:
-        dataset.append([0] * 25)
+        if str(element[0]) + "/" + str(element[1]) + "/" + str(element[2]) == dateTime.strftime("%Y/%m/%d"):
+            counter = counter + 1
+            if (element[3][0] != None):
+                to_feed.append(element[3][0])
+                to_feed_notables.append(element[3][1])
+            else:
+                to_feed.append([0] * 25)
+                to_feed_notables.append("The dining court appears to be closed.")
 
-    if wileyScraped != None:
-        dataset.append(wileyScraped)
-    else:
-        dataset.append([0] * 25)
-    if hillenbrandScraped != None:
-        dataset.append(hillenbrandScraped)
-    else:
-        dataset.append([0] * 25)
-        
-    if windsorScraped != None:
-        dataset.append(windsorScraped)
-    else:
-        dataset.append([0] * 25)
+    notableFoods = "Notables:\n||__Wiley__: " + str(to_feed_notables[0]) + "\n\n"
+    notableFoods += "__Hillenbrand__: " + str(to_feed_notables[1]) + "\n\n"
+    notableFoods += "__Windsor__: " + str(to_feed_notables[2]) + "\n\n"
+    notableFoods += "__Ford__: " + str(to_feed_notables[3]) + "||\n"
 
-    queryDataFrame = pd.DataFrame(dataset)
+    queryDataFrame = pd.DataFrame(to_feed)
     queryDataFrame.columns = ['oge_chkn','ppc_chkn','tenders','pep_pizza','hamburg','shrimp','ML_Pizza','slop_jo','pasta','min_cornd','coulotte','clam_strip','cheese_rav', 'ML_pizza','SS_chkn',
                               'mac','fraldinha','wonton','popper','mac_pizza','fajita','tso_chkn','hamburg','mozz_stk','mac']
 
@@ -72,7 +66,7 @@ def evaluate(dateTime):
     queryDataFrame.to_csv(INTERMEDIARY_PATH)
 
 
-    # output format: [{ford} {wiley} {hillenbrand} {windsor}]
+    # output format: [{wiley} {hillenbrand} {windsor} {ford}]
 
     df_predict = model.predict(queryDataFrame)
 
