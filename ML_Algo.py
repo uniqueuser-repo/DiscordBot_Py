@@ -13,6 +13,7 @@ load_dotenv()
 OUTPUTFILE_PATH = os.getenv('OUTPUTFILE_PATH')
 OUTPUTFILE_LABELS_PATH = os.getenv('OUTPUTFILE_LABELS_PATH')
 INTERMEDIARY_PATH = os.getenv('INTERMEDIARY_PATH')
+ONGOING_LIST = os.getenv('ONGOING_LIST')
 
 
 def evaluate(dateTime):
@@ -32,6 +33,7 @@ def evaluate(dateTime):
     dayVal = dateTime.strftime("%d")
     monthVal = dateTime.strftime("%m")
 
+    dataset = pd.read_csv(ONGOING_LIST)
     wileyScraped, wileyFoodScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")  # for future, implement
     windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")              # auto scraper that writes to file
