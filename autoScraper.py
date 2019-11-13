@@ -8,7 +8,8 @@ import os
 load_dotenv()
 
 def scrapeFour():
-    seven_days_ahead = datetime.now() + timedelta(days=1)
+    print("RUNNING!\n\n\n\n")
+    seven_days_ahead = datetime.now() + timedelta(days=3)
 
     yearVal = seven_days_ahead.year
     monthVal = seven_days_ahead.month
@@ -18,18 +19,16 @@ def scrapeFour():
     hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    dataset = [[[yearVal, monthVal, dayVal, [wileyScraped, wileyFoodScraped]]]]
+    dataset.append([[yearVal, monthVal, dayVal, [hillenbrandScraped, hillenbrandFoodScraped]]])
+    dataset.append([[yearVal, monthVal, dayVal, [windsorScraped, windsorFoodScraped]]])
+    dataset.append([[yearVal, monthVal, dayVal, [fordScraped, fordFoodScraped]]])
 
-    dataset = pd.read_csv(os.getenv("ONGOING_LIST"))
-
-    generated_dataframe = pd.DataFrame(dataset)
-    generated_dataframe.append([[[yearVal, monthVal, dayVal, [wileyScraped, wileyFoodScraped]]]])
-    generated_dataframe.append([[yearVal, monthVal, dayVal, [hillenbrandScraped, hillenbrandFoodScraped]]])
-    generated_dataframe.append([[yearVal, monthVal, dayVal, [windsorScraped, windsorFoodScraped]]])
-    generated_dataframe.append([[yearVal, monthVal, dayVal, [fordScraped, fordFoodScraped]]])
-
-    generated_dataframe.to_csv(os.getenv("ONGOING_LIST"))
+    generated_dataframe = pd.DataFrame(dataset, columns=['0'])
+    ongoing_dataframe = pd.read_csv(os.getenv("ONGOING_LIST"))
+    ongoing_dataframe = ongoing_dataframe.drop(ongoing_dataframe.columns[0], axis=1)
+    ongoing_dataframe = ongoing_dataframe.append(generated_dataframe, ignore_index=True)
+    ongoing_dataframe.to_csv(os.getenv("ONGOING_LIST"))
 
 
-
-scrapeFour()
-#schedule.every().day.at("00:00").do(scrapeFour())
+schedule.every().day.at("00:00").do(scrapeFour())
