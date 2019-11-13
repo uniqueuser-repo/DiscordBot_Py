@@ -33,9 +33,10 @@ def evaluate(dateTime):
     monthVal = dateTime.strftime("%m")
 
     wileyScraped, wileyFoodScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
-    fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
+    hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")  # for future, implement
+    windsorScraped, windsorFoodScraped = scrapedList("https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")              # auto scraper that writes to file
+    fordScraped, fordFoodScraped = scrapedList("https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")                       # to improve responsiveness?
+                                                                                                                                                                                     # and read file instead
 
     notableFoods = "Notables:\n||__Ford__: " + str(fordFoodScraped) + "\n\n"
     notableFoods += "__Wiley__: " + str(wileyFoodScraped) + "\n\n"
