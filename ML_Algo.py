@@ -53,10 +53,49 @@ def evaluate(dateTime):
                 to_feed.append([0] * 25)
                 to_feed_notables.append("The dining court appears to be closed.")
 
-    notableFoods = "Notables:\n||__Wiley__: " + str(to_feed_notables[0]) + "\n\n"
-    notableFoods += "__Hillenbrand__: " + str(to_feed_notables[1]) + "\n\n"
-    notableFoods += "__Windsor__: " + str(to_feed_notables[2]) + "\n\n"
-    notableFoods += "__Ford__: " + str(to_feed_notables[3]) + "||\n"
+    if (counter == 0):
+        to_feed = []
+        to_feed_notables = []
+        wileyScraped, wileyFoodScraped = scrapedList(
+            "https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+                2) + "/Dinner")
+        hillenbrandScraped, hillenbrandFoodScraped = scrapedList(
+            "https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+                2) + "/Dinner")
+        windsorScraped, windsorFoodScraped = scrapedList(
+            "https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+                2) + "/Dinner")
+        fordScraped, fordFoodScraped = scrapedList(
+            "https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+                2) + "/Dinner")
+        notableFoods = "Notables:\n||__Ford__: " + str(fordFoodScraped) + "\n\n"
+        notableFoods += "__Wiley__: " + str(wileyFoodScraped) + "\n\n"
+        notableFoods += "__Hillenbrand__: " + str(hillenbrandFoodScraped) + "\n\n"
+        notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "||\n"
+
+        if fordScraped != None:
+            to_feed.append(fordScraped)
+        else:
+            to_feed.append([0] * 25)
+
+        if wileyScraped != None:
+            to_feed.append(wileyScraped)
+        else:
+            to_feed.append([0] * 25)
+        if hillenbrandScraped != None:
+            to_feed.append(hillenbrandScraped)
+        else:
+            to_feed.append([0] * 25)
+
+        if windsorScraped != None:
+            to_feed.append(windsorScraped)
+        else:
+            to_feed.append([0] * 25)
+    else:
+        notableFoods = "Notables:\n||__Wiley__: " + str(to_feed_notables[0]) + "\n\n"
+        notableFoods += "__Hillenbrand__: " + str(to_feed_notables[1]) + "\n\n"
+        notableFoods += "__Windsor__: " + str(to_feed_notables[2]) + "\n\n"
+        notableFoods += "__Ford__: " + str(to_feed_notables[3]) + "||\n"
 
     queryDataFrame = pd.DataFrame(to_feed)
     queryDataFrame.columns = ['oge_chkn','ppc_chkn','tenders','pep_pizza','hamburg','shrimp','ML_Pizza','slop_jo','pasta','min_cornd','coulotte','clam_strip','cheese_rav', 'ML_pizza','SS_chkn',
