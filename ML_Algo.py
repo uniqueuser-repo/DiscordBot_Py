@@ -7,6 +7,8 @@ import numpy as np
 from dotenv import load_dotenv
 from datetime import date
 import csv
+from dotenv import load_dotenv
+import os
 import ast
 
 load_dotenv()
@@ -15,7 +17,6 @@ OUTPUTFILE_PATH = os.getenv('OUTPUTFILE_PATH')
 OUTPUTFILE_LABELS_PATH = os.getenv('OUTPUTFILE_LABELS_PATH')
 INTERMEDIARY_PATH = os.getenv('INTERMEDIARY_PATH')
 ONGOING_LIST = os.getenv('ONGOING_LIST')
-
 
 def evaluate(dateTime):
 

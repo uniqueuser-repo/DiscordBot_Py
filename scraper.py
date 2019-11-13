@@ -15,7 +15,6 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     for i in range(len(goods)): # map each food to an index, mark 0 for nonexistent
         returnOrderedDict[goods[i]] = 0
 
-
     #chrome_options = Options()                                         #
     #chrome_options.add_argument("--headless")                          # comment these lines to begin
     #chrome_options.add_argument("--window-size=%s" % "1920,1080")      # seeing the window again

@@ -69,7 +69,7 @@ async def on_message(message):
                     printString = createPrintStringNoMention(date_time_obj)
                     await message.channel.send(printString)
             else:
-                printString = createPrintStringMention(datetime.datetime.today())
+                printString = createPrintStringNoMention(datetime.datetime.today())
                 await message.channel.send(printString)
 
             for process in psutil.process_iter():

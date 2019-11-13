@@ -39,6 +39,7 @@ for day in range(1, 18, 1):
 
 dataset_to_pandas = pd.DataFrame.from_records(dataset)
 
+load_dotenv()
 OUTPUTFILE_PATH = os.getenv('OUTPUTFILE_PATH')
 
 dataset_to_pandas.to_csv(OUTPUTFILE_PATH)
