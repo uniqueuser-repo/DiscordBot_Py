@@ -18,7 +18,8 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
 
     chrome_options = Options()                                         #
     chrome_options.add_argument("--headless")                          # uncomment these lines to begin
-    chrome_options.add_argument("--window-size=%s" % "1920,1080")      # seeing the window again
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")             # seeing the window again
 
     url = url_input
     driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
