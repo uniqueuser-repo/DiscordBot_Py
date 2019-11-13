@@ -1,5 +1,7 @@
 from scraper import scrapedList
 import pandas as pd
+import os
+from dotenv import load_dotenv
 
 # do some kind of matching so that we only send scrapedList valid urls from DC site
 
@@ -37,7 +39,9 @@ for day in range(1, 18, 1):
 
 dataset_to_pandas = pd.DataFrame.from_records(dataset)
 
-dataset_to_pandas.to_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile.csv")
+OUTPUTFILE_PATH = os.getenv('OUTPUTFILE_PATH')
+
+dataset_to_pandas.to_csv(OUTPUTFILE_PATH)
 
 
 
