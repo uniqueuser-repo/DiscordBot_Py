@@ -36,7 +36,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ML_Algo">
+  <component name="RunManager" selected="Python.bot">
     <configuration name="ML_Algo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DiscordBot_Py" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,10 +149,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.bot" />
         <item itemvalue="Python.ML_Algo" />
         <item itemvalue="Python.autoScraper" />
         <item itemvalue="Python.scraper" />
-        <item itemvalue="Python.bot" />
         <item itemvalue="Python.datasetCreator" />
       </list>
     </recent_temporary>
@@ -186,7 +186,7 @@
       <workItem from="1573677731065" duration="1608000" />
       <workItem from="1573682000045" duration="536000" />
       <workItem from="1573682662561" duration="1397000" />
-      <workItem from="1573686118744" duration="2186000" />
+      <workItem from="1573686118744" duration="2453000" />
     </task>
     <servers />
   </component>
@@ -232,7 +232,7 @@
     <SUITE FILE_PATH="coverage/DiscordBot_Py$patent.coverage" NAME="patent Coverage Results" MODIFIED="1573153234994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$datasetCreator.coverage" NAME="datasetCreator Coverage Results" MODIFIED="1573166868766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$scraperRetrieved.coverage" NAME="scraperRetrieved Coverage Results" MODIFIED="1573156230666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DiscordBot_Py$bot.coverage" NAME="bot Coverage Results" MODIFIED="1573342531466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DiscordBot_Py$bot.coverage" NAME="bot Coverage Results" MODIFIED="1573689157068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$ML_Algo.coverage" NAME="ML_Algo Coverage Results" MODIFIED="1573687334179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$autoScraper.coverage" NAME="autoScraper Coverage Results" MODIFIED="1573686152481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
