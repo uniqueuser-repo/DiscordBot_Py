@@ -5,11 +5,19 @@ from scraper import scrapedList
 import numpy as np
 from datetime import date
 import csv
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+OUTPUTFILE_PATH = os.getenv('OUTPUTFILE_PATH')
+OUTPUTFILE_LABELS_PATH = os.getenv('OUTPUTFILE_LABELS_PATH')
+INTERMEDIARY_PATH = os.getenv('INTERMEDIARY_PATH')
 
 def evaluate(dateTime):
 
-    input_dataset_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile.csv")
-    input_dataset_labels_frame = pd.read_csv(r"C:\Users\Andy\PycharmProjects\DiscordBot_Py\outputfile_labels.csv")
+    input_dataset_frame = pd.read_csv(OUTPUTFILE_PATH)
+    input_dataset_labels_frame = pd.read_csv(OUTPUTFILE_LABELS_PATH)
 
     del input_dataset_frame['Unnamed: 0']
 
@@ -57,7 +65,7 @@ def evaluate(dateTime):
                               'mac','fraldinha','wonton','popper','mac_pizza','fajita','tso_chkn','hamburg','mozz_stk','mac']
 
 
-    queryDataFrame.to_csv(r'C:\Users\Andy\PycharmProjects\DiscordBot_Py\intermediary.csv')
+    queryDataFrame.to_csv(INTERMEDIARY_PATH)
 
 
     # output format: [{ford} {wiley} {hillenbrand} {windsor}]
