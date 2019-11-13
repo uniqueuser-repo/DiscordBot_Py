@@ -15,18 +15,16 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     for i in range(len(goods)): # map each food to an index, mark 0 for nonexistent
         returnOrderedDict[goods[i]] = 0
 
-
-    chrome_options = Options()                                         #
-    chrome_options.add_argument("--headless")                          # uncomment these lines to begin
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")             # seeing the window again
+    #chrome_options = Options()                                         #
+    #chrome_options.add_argument("--headless")                          # comment these lines to begin
+    #chrome_options.add_argument("--window-size=%s" % "1920,1080")      # seeing the window again
 
     url = url_input
-    driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     html = driver.page_source
 
-    if html.count("Bummer!") or len(html) == 0:
+    if html.count("Bummer!") or len(html) == 0 or html.lower().count("had a problem..") or html.lower().count("couldn't find that page"):
         driver.close()
         return None, "The dining court appears to be closed."              # returns "none" if the DC is closed that day
 
@@ -51,6 +49,7 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
             else:
                 returnOrderedDict[elementString.lower()] = 1          # if the food exists at the dining court on that day, change the value of the food's mapping to 1.
                 returnedFoodList.append(elementString.lower())
+
 
     returnedList = []
     for i in range(len(returnOrderedDict)):
