@@ -5547,3 +5547,4 @@ venv/Lib/site-packages/__pycache__/configparser.cpython-38.pyc
 __pycache__/scraper.cpython-37.pyc
 __pycache__/ML_Algo.cpython-37.pyc
 .idea/workspace.xml
+intermediary.csv

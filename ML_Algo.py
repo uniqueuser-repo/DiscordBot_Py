@@ -34,6 +34,7 @@ def evaluate(dateTime):
     dataset = []
     dayVal = dateTime.strftime("%d")
     monthVal = dateTime.strftime("%m")
+    yearVal = dateTime.strftime("%Y")
 
     dataset = pd.read_csv(ONGOING_LIST)
 
@@ -58,21 +59,21 @@ def evaluate(dateTime):
         to_feed = []
         to_feed_notables = []
         wileyScraped, wileyFoodScraped = scrapedList(
-            "https://dining.purdue.edu/menus/Wiley/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+            "https://dining.purdue.edu/menus/Wiley/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
                 2) + "/Dinner")
         hillenbrandScraped, hillenbrandFoodScraped = scrapedList(
-            "https://dining.purdue.edu/menus/Hillenbrand/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+            "https://dining.purdue.edu/menus/Hillenbrand/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
                 2) + "/Dinner")
         windsorScraped, windsorFoodScraped = scrapedList(
-            "https://dining.purdue.edu/menus/Windsor/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+            "https://dining.purdue.edu/menus/Windsor/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
                 2) + "/Dinner")
         fordScraped, fordFoodScraped = scrapedList(
-            "https://dining.purdue.edu/menus/Ford/2019/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
+            "https://dining.purdue.edu/menus/Ford/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(
                 2) + "/Dinner")
-        notableFoods = "Notables:\n||__Ford__: " + str(fordFoodScraped) + "\n\n"
-        notableFoods += "__Wiley__: " + str(wileyFoodScraped) + "\n\n"
+        notableFoods = "Notables:\n||__Wiley__: " + str(wileyFoodScraped) + "\n\n"
         notableFoods += "__Hillenbrand__: " + str(hillenbrandFoodScraped) + "\n\n"
-        notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "||\n"
+        notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "\n\n"
+        notableFoods += "__Ford__: " + str(fordFoodScraped) + "||\n"
 
         if fordScraped != None:
             to_feed.append(fordScraped)

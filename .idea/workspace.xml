@@ -36,7 +36,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scraper">
+  <component name="RunManager" selected="Python.bot">
     <configuration name="ML_Algo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DiscordBot_Py" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,9 +149,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.bot" />
         <item itemvalue="Python.scraper" />
         <item itemvalue="Python.autoScraper" />
-        <item itemvalue="Python.bot" />
         <item itemvalue="Python.ML_Algo" />
         <item itemvalue="Python.datasetCreator" />
       </list>
@@ -188,7 +188,7 @@
       <workItem from="1573682662561" duration="1397000" />
       <workItem from="1573686118744" duration="3264000" />
       <workItem from="1573690183934" duration="2072000" />
-      <workItem from="1573770936770" duration="1339000" />
+      <workItem from="1573770936770" duration="1798000" />
     </task>
     <servers />
   </component>
@@ -213,6 +213,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bot.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -234,7 +241,7 @@
     <SUITE FILE_PATH="coverage/DiscordBot_Py$patent.coverage" NAME="patent Coverage Results" MODIFIED="1573153234994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$datasetCreator.coverage" NAME="datasetCreator Coverage Results" MODIFIED="1573166868766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$scraperRetrieved.coverage" NAME="scraperRetrieved Coverage Results" MODIFIED="1573156230666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DiscordBot_Py$bot.coverage" NAME="bot Coverage Results" MODIFIED="1573690956335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DiscordBot_Py$bot.coverage" NAME="bot Coverage Results" MODIFIED="1573773062753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$ML_Algo.coverage" NAME="ML_Algo Coverage Results" MODIFIED="1573687334179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DiscordBot_Py$autoScraper.coverage" NAME="autoScraper Coverage Results" MODIFIED="1573690961320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
