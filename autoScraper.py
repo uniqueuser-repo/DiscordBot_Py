@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 import ast
 import time
+import psutil
 
 load_dotenv()
 
@@ -45,4 +46,10 @@ while (1):
     now = datetime.now()
     print(str(now))
     schedule.run_pending()
+    for process in psutil.process_iter():
+        try:
+            if process.name().startswith("chromedriv"):
+                process.terminate()
+        except psutil.NoSuchProcess:
+            pass
     time.sleep(1800)
