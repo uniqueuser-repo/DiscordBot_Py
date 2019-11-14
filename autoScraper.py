@@ -42,7 +42,7 @@ def scrapeFour():
 schedule.every().day.at("00:00").do(scrapeFour)
 
 while (1):
-    now = datetime.datetime.now()
+    now = datetime.now()
     print(str(now))
     schedule.run_pending()
     time.sleep(1800)

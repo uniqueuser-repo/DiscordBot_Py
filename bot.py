@@ -109,10 +109,10 @@ def createPrintStringNoMention(dateTime):
     evaluated = evaluated[1:-1]
     intList = [int(i) for i in evaluated.split()]
 
-    printString += "Ford: " + str(intList[0]) + "\n"
-    printString += "Wiley: " + str(intList[1]) + "\n"
-    printString += "Hillenbrand: " + str(intList[2]) + "\n"
-    printString += "Windsor: " + str(intList[3]) + "\n"
+    printString += "Wiley: " + str(intList[0]) + "\n"
+    printString += "Hillenbrand: " + str(intList[1]) + "\n"
+    printString += "Windsor: " + str(intList[2]) + "\n"
+    printString += "Ford: " + str(intList[3]) + "\n"
     printString += "\n" + foodString
 
     return printString
