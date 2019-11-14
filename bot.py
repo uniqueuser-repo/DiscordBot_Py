@@ -79,10 +79,10 @@ async def on_message(message):
                 except psutil.NoSuchProcess:
                     pass
 
-    except ValueError as e:
+    except TypeError as e:
         print("yikes")
         await message.channel.send(str(e))
-    except Exception as e:
+    except IndentationError as e:
         print("yikes")
         await message.channel.send("Please see console! Unexpected exception:\n" + str(e))
 
