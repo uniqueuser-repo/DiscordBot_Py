@@ -39,8 +39,10 @@ def scrapeFour():
     ongoing_dataframe.to_csv(os.getenv("ONGOING_LIST"))
 
 
-schedule.every(1).day.at("00:00").do(scrapeFour)
+schedule.every().day.at("00:00").do(scrapeFour)
 
 while (1):
+    now = datetime.datetime.now()
+    print(str(now))
     schedule.run_pending()
-    time.sleep(60000)
+    time.sleep(1800)
