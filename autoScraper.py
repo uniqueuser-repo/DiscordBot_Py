@@ -5,6 +5,7 @@ import pandas as pd
 from dotenv import load_dotenv
 import os
 import ast
+import time
 
 load_dotenv()
 
@@ -19,9 +20,9 @@ def scrapeFour():
         if str(element[0]) + "/" + str(element[1]) + "/" + str(element[2]) == three_days_ahead.strftime("%Y/%m%d"):
             return
 
-    yearVal = seven_days_ahead.year
-    monthVal = seven_days_ahead.month
-    dayVal = seven_days_ahead.day
+    yearVal = three_days_ahead.year
+    monthVal = three_days_ahead.month
+    dayVal = three_days_ahead.day
 
     wileyScraped, wileyFoodScraped = scrapedList("https://dining.purdue.edu/menus/Wiley/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
     hillenbrandScraped, hillenbrandFoodScraped = scrapedList("https://dining.purdue.edu/menus/Hillenbrand/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(dayVal).zfill(2) + "/Dinner")
@@ -42,4 +43,4 @@ schedule.every(1).day.at("00:00").do(scrapeFour)
 
 while (1):
     schedule.run_pending()
-
+    time.sleep(60000)
