@@ -38,7 +38,7 @@ def evaluate(dateTime):
 
     dataset = pd.read_csv(ONGOING_LIST)
 
-    counter = 0;
+    counter = 0
     to_feed = []
     to_feed_notables = []
     for index, row in dataset.iterrows():
