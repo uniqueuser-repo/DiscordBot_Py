@@ -3,7 +3,7 @@ A bot for the popular VOIP and text communication service, Discord.
 Incorporates machine learning, data scraping, dataset creation.  
 Version beta.  
 
-Important files:
+Important files:  
   bot.py (code for the actual bot that interfaces with Discord)  
   ML_Algo.py (contains code for training the ML algo)  
   scraper.py (scrapes foods from dining court website)  
