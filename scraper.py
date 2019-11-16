@@ -38,6 +38,7 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
     var = soup.find_all('span', {'class':'station-item-text'})
 
     if (len(var) <= 1):
+        driver.close()
         return scrapedList(url_input) # if url was mishandled, re-call until it wasn't.
 
     for element in var:
