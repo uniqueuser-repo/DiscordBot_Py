@@ -28,7 +28,7 @@ def scrapedList(url_input):  # returns a value listing of matched foods or "NONE
 
     if html.count("Bummer!") or len(html) == 0 or html.lower().count("had a problem..") or html.lower().count("couldn't find that page"):
         driver.close()
-        return None, "The dining court appears to be closed."              # returns "none" if the DC is closed that day
+        return None, "The dining court appears to be closed."              # returns None if the DC is closed that day
 
 
     soup = BeautifulSoup(html, 'html.parser')
