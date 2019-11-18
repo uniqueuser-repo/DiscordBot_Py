@@ -117,6 +117,4 @@ def createPrintStringNoMention(dateTime):
 
     return printString
 
-
-# client.loop.create_task(my_background_task())
 client.run(TOKEN)
