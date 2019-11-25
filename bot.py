@@ -38,7 +38,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.author.id == 443954797520093185:
+    if message.author.id == 443954797520093185 or message.author.id == 116275390695079945:
         if message.content.lower().count(".foodme") > 0:
             print("CONSOLE: ignoring command from blocked user...")
         return
@@ -58,7 +58,7 @@ async def on_message(message):
         await message.channel.send("Here you go! " + printableMessage)
 
     try:
-        if (message.content.lower().startswith(".foodme")):
+        if message.content.lower().startswith(".foodme"):
             if len(message.content.lower().split()) > 1:
                 splitList = message.content.lower().split()
                 dateString = splitList[1]
