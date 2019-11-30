@@ -80,12 +80,6 @@ def evaluate(dateTime):
         notableFoods += "__Windsor__: " + str(windsorFoodScraped) + "\n\n"
         notableFoods += "__Ford__: " + str(fordFoodScraped) + "||\n"
 
-        if fordScraped != None:
-            to_feed.append(fordScraped)  # if the dining court was NOT closed,
-            # append the set of scraped foods to to_feed (may be the empty set of all 0s)
-        else:
-            to_feed.append([0] * 25)  # if the dining court was closed, append set of empty foods to to_feed
-
         if wileyScraped != None:
             to_feed.append(wileyScraped)  # if the dining court was NOT closed,
             # append the set of scraped foods to to_feed (may be the empty set of all 0s)
@@ -100,6 +94,12 @@ def evaluate(dateTime):
 
         if windsorScraped != None:
             to_feed.append(windsorScraped)  # if the dining court was NOT closed,
+            # append the set of scraped foods to to_feed (may be the empty set of all 0s)
+        else:
+            to_feed.append([0] * 25)  # if the dining court was closed, append set of empty foods to to_feed
+
+        if fordScraped != None:
+            to_feed.append(fordScraped)  # if the dining court was NOT closed,
             # append the set of scraped foods to to_feed (may be the empty set of all 0s)
         else:
             to_feed.append([0] * 25)  # if the dining court was closed, append set of empty foods to to_feed

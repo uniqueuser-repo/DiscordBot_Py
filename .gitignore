@@ -12499,3 +12499,7 @@ venv-2/Lib/site-packages/numpy/lib/tests/__pycache__/test_mixins.cpython-37.pyc
 .idea/workspace.xml
 .idea/workspace.xml
 .idea/workspace.xml
+.idea/workspace.xml
+__pycache__/ML_Algo.cpython-37.pyc
+__pycache__/scraper.cpython-37.pyc
+intermediary.csv
