@@ -42,12 +42,12 @@ def evaluate(dateTime):
     counter = 0
     to_feed = []
     to_feed_notables = []
-    for index, row in dataset.iterrows():
-        if (counter == 4):
+    for index, row in dataset.iterrows():  # first, check if the specified date is cached
+        if (counter == 4):                 # break when 4 of the dining courts have been added to to_feed
             break
         element = ast.literal_eval(row['0'])
 
-        if str(element[0]) + "/" + str(element[1]) + "/" + str(element[2]) == dateTime.strftime("%Y/%m/%d"):
+        if str(element[0].zfill(2)) + "/" + str(element[1].zfill(2)) + "/" + str(element[2].zfill(2)) == dateTime.strftime("%Y/%m/%d"): # if the cached row's date is the same as the specified date's dateTime object
             counter = counter + 1
             if (element[3][0] != None):
                 to_feed.append(element[3][0])
@@ -56,7 +56,7 @@ def evaluate(dateTime):
                 to_feed.append([0] * 25)
                 to_feed_notables.append("The dining court appears to be closed.")
 
-    if (counter == 0):
+    if (counter == 0): # if the counter is 0, that is to say, the specified date wasn't cached, scrape from site.
         to_feed = []
         to_feed_notables = []
         wileyScraped, wileyFoodScraped = scrapedList(
@@ -111,7 +111,7 @@ def evaluate(dateTime):
             to_feed_notables[2]) + "\n\n"  # for printing by the bot to the server later
         notableFoods += "__Ford__: " + str(to_feed_notables[3]) + "||\n"  #
 
-    queryDataFrame = pd.DataFrame(to_feed)
+    queryDataFrame = pd.DataFrame(to_feed) # turn the to_feed list into a DataFrame
     queryDataFrame.columns = ['oge_chkn', 'ppc_chkn', 'tenders', 'pep_pizza', 'hamburg', 'shrimp', 'ML_Pizza',
                               'slop_jo', 'pasta', 'min_cornd', 'coulotte', 'clam_strip', 'cheese_rav', 'ML_pizza',
                               'SS_chkn',

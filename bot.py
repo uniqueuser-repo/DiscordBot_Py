@@ -59,22 +59,22 @@ async def on_message(message):
 
     try:
         if message.content.lower().startswith(".foodme"):
-            if len(message.content.lower().split()) > 1:
+            if len(message.content.lower().split()) > 1:  # for the case where a date is specified
                 splitList = message.content.lower().split()
-                dateString = splitList[1]
+                dateString = splitList[1]  # acquires the specified date, stores in dateString
                 date_time_obj = datetime.datetime.strptime(dateString, '%m/%d/%Y')
                 if date_time_obj.weekday() == 6:
                     await message.channel.send("That's a Sunday homie. No din din.")
                 else:
                     printString = createPrintStringNoMention(date_time_obj)
                     await message.channel.send(printString)
-            else:
+            else: # for the case where no date is specified, i.e. today
                 printString = createPrintStringNoMention(datetime.datetime.today())
                 await message.channel.send(printString)
 
             for process in psutil.process_iter():
                 try:
-                    if process.name().startswith("chromedriv"):
+                    if process.name().startswith("chromedriv"): # kill leftover runaway processes
                         process.terminate()
                 except psutil.NoSuchProcess:
                     pass
