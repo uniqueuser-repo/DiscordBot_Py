@@ -18,6 +18,24 @@ OUTPUTFILE_LABELS_PATH = os.getenv('OUTPUTFILE_LABELS_PATH')
 INTERMEDIARY_PATH = os.getenv('INTERMEDIARY_PATH')
 ONGOING_LIST = os.getenv('ONGOING_LIST')
 
+def checkCache(dataset, to_feed, to_feed_notables, dateTime):
+    counter = 0
+    for index, row in dataset.iterrows():  # first, check if the specified date is cached
+        if (counter == 4):                 # break when 4 of the dining courts have been added to to_feed
+            break
+
+        element = ast.literal_eval(row['0']) # take the retrieved row (which is a String of a list) and convert it into a list, held in 'element'
+
+        if str(element[0]).zfill(2) + "/" + str(element[1]).zfill(2) + "/" + str(element[2]).zfill(2) == dateTime.strftime("%Y/%m/%d"): # if the cached row's date is the same as the specified date's dateTime object
+            counter = counter + 1
+            if (element[3][0] != None):
+                to_feed.append(element[3][0])
+                to_feed_notables.append(element[3][1])
+            else:
+                to_feed.append([0] * 25)
+                to_feed_notables.append("The dining court appears to be closed.")
+
+    return counter
 
 def evaluate(dateTime):
     input_dataset_frame = pd.read_csv(OUTPUTFILE_PATH)
@@ -32,33 +50,17 @@ def evaluate(dateTime):
 
     model = ML_Obj.fit(X_train, np.ravel(y_train))  # model now contains the ML
 
-    dataset = []
     dayVal = dateTime.strftime("%d")
     monthVal = dateTime.strftime("%m")
     yearVal = dateTime.strftime("%Y")
 
     dataset = pd.read_csv(ONGOING_LIST)
-
-    counter = 0
     to_feed = []
     to_feed_notables = []
-    for index, row in dataset.iterrows():  # first, check if the specified date is cached
-        if (counter == 4):                 # break when 4 of the dining courts have been added to to_feed
-            break
-        element = ast.literal_eval(row['0'])
 
-        if str(element[0]).zfill(2) + "/" + str(element[1]).zfill(2) + "/" + str(element[2]).zfill(2) == dateTime.strftime("%Y/%m/%d"): # if the cached row's date is the same as the specified date's dateTime object
-            counter = counter + 1
-            if (element[3][0] != None):
-                to_feed.append(element[3][0])
-                to_feed_notables.append(element[3][1])
-            else:
-                to_feed.append([0] * 25)
-                to_feed_notables.append("The dining court appears to be closed.")
+    counter = checkCache(dataset, to_feed, to_feed_notables, dateTime)  # if counter == 0, date not in cache. if anything else, date in cache.
 
     if (counter == 0): # if the counter is 0, that is to say, the specified date wasn't cached, scrape from site.
-        to_feed = []
-        to_feed_notables = []
         wileyScraped, wileyFoodScraped = scrapedList(
             "https://dining.purdue.edu/menus/Wiley/" + str(yearVal) + "/" + str(monthVal).zfill(2) + "/" + str(
                 dayVal).zfill(

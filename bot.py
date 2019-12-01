@@ -7,6 +7,7 @@ from ML_Algo import evaluate
 from multiprocessing import Process
 import asyncio
 import psutil
+import traceback
 
 load_dotenv()
 
@@ -85,6 +86,7 @@ async def on_message(message):
     except Exception as e:
         print("yikes")
         await message.channel.send("Please see console! Unexpected exception:\n" + str(e))
+        traceback.print_exc()
 
 def createPrintStringMention(dateTime):
     printString = createPrintStringNoMention(dateTime)
