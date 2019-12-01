@@ -47,7 +47,7 @@ def evaluate(dateTime):
             break
         element = ast.literal_eval(row['0'])
 
-        if str(element[0].zfill(2)) + "/" + str(element[1].zfill(2)) + "/" + str(element[2].zfill(2)) == dateTime.strftime("%Y/%m/%d"): # if the cached row's date is the same as the specified date's dateTime object
+        if str(element[0]).zfill(2) + "/" + str(element[1]).zfill(2) + "/" + str(element[2]).zfill(2) == dateTime.strftime("%Y/%m/%d"): # if the cached row's date is the same as the specified date's dateTime object
             counter = counter + 1
             if (element[3][0] != None):
                 to_feed.append(element[3][0])
