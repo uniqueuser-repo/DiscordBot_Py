@@ -1,5 +1,6 @@
 
 .env
+intermediary.csv
 venv/Lib/site-packages/__pycache__/configparser.cpython-38.pyc
 venv/Lib/site-packages/__pycache__/crayons.cpython-38.pyc
 venv/Lib/site-packages/__pycache__/six.cpython-38.pyc
